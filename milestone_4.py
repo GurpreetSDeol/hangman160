@@ -6,20 +6,12 @@ class Hangman:
         
         self.word_list=word_list
         self.num_lives = 5
-        self.word = self.choose_word()
-        self.word_guessed = self.fill_empty_list()
-        self.num_letters = self.get_unique_letters() 
+        self.word = r.choice(self.word_list)
+        self.word_guessed = ["_"] * len(self.word)
+        self.num_letters = len(set(self.word))
         self.list_of_guesses = []
         
-        def choose_word(self):
-            return r.choice(self.word_list)
-   
-        def fill_empty_list(self):
-            return ["_"] * len(self.word)
-   
-        def get_unique_letters(self):
-           return len(set(self.word))
-        
+
         def check_guess(self, guess):
             guess = guess.lower()
           
@@ -36,18 +28,29 @@ class Hangman:
               print('You have'+" "+ self.num_lives +" "+ 'lives left')
               
         def ask_for_input(self):
-            while True:
-                
-                print('Please enter a single letter;')
-                guess = input()
+          
+          '''
+          This function asks the user for a single alphabetical input
+          
+          
+          '''
+             
+          
+          while True:
+                  
+                  print('Please enter a single letter;')
+                  guess = input()
 
-                if not len(guess) != 1 & guess.isalpha()==True:
-                    print('Invalid letter. Please, enter a single alphabetical character.')
-                    
-                elif guess in self.list_of_guesses:
-                    print('You already tried that letter')
-                    
-                else:
-                  check_guess(guess)
-                  self.list_of_guesses.append(guess)
+                  if len(guess) != 1 & guess.isalpha()!=True:
+                      print('Invalid letter. Please, enter a single alphabetical character.')
+                      break
+                      
+                  elif guess in self.list_of_guesses:
+                      print('You already tried that letter')
+                      break
+                      
+                  else:
+                    self.check_guess(guess)
+                    self.list_of_guesses.append(guess)
+                    break
     
